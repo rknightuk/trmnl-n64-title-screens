@@ -2,14 +2,9 @@ import fs from 'fs'
 import { DOMParser, parseHTML } from 'linkedom'
 
 const pages = [
-    'https://tcrf.net/Category:PlayStation_title_screens',
-    'https://tcrf.net/index.php?title=Category:PlayStation_title_screens&filefrom=ChillSep30+Title.png#mw-category-media',
-    'https://tcrf.net/index.php?title=Category:PlayStation_title_screens&filefrom=Everybody%27s+Golf.png#mw-category-media',
-    'https://tcrf.net/index.php?title=Category:PlayStation_title_screens&filefrom=Kaisoku+Tenshi+Title.png#mw-category-media',
-    'https://tcrf.net/index.php?title=Category:PlayStation_title_screens&filefrom=NBA+Jam+Tournament+Edition+%28PlayStation%29-title.png#mw-category-media',
-    'https://tcrf.net/index.php?title=Category:PlayStation_title_screens&filefrom=Redalert-playstation.png#mw-category-media',
-    'https://tcrf.net/index.php?title=Category:PlayStation_title_screens&filefrom=Spider-Man+%28PlayStation%29-title.png#mw-category-media',
-    'https://tcrf.net/index.php?title=Category:PlayStation_title_screens&filefrom=TwistedMetal4-ProtoTwintorchers.png#mw-category-media',   
+    'https://tcrf.net/Category:Nintendo_64_title_screens',
+    'https://tcrf.net/index.php?title=Category:Nintendo_64_title_screens&filefrom=Morita+Shogi+64-title.png#mw-category-media',
+    'https://tcrf.net/index.php?title=Category:Nintendo_64_title_screens&filefrom=Winback+-+Title+Screen.png#mw-category-media',
 ]
 
 const fetchPageHtml = async (link) => {
@@ -22,20 +17,20 @@ const fetchPageHtml = async (link) => {
     return document
 }
 
-// if (!fs.existsSync('file-links.json')) {
-//     let files = []
+if (!fs.existsSync('file-links.json')) {
+    let files = []
 
-//     for (const page of pages) {
-//         const fileDocument = await fetchPageHtml(page)
+    for (const page of pages) {
+        const fileDocument = await fetchPageHtml(page)
 
-//         files = [
-//             ...files,
-//             ...Array.from(fileDocument.querySelectorAll('.thumb a')).map(a => a.href)
-//         ]
-//     }
+        files = [
+            ...files,
+            ...Array.from(fileDocument.querySelectorAll('.thumb a')).map(a => a.href)
+        ]
+    }
 
-//     fs.writeFileSync('file-links.json', JSON.stringify(files, null, 2));   
-// }
+    fs.writeFileSync('file-links.json', JSON.stringify(files, null, 2));   
+}
 
 const fileLinks = JSON.parse(fs.readFileSync('file-links.json', 'utf-8'))
 
